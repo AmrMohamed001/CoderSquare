@@ -4,9 +4,29 @@ CoderSquare is a web application built with Node.js and Express that provides AP
 
 ## Project Idea
 
-The idea behind CoderSquare is to create a platform where users can share posts, like and comment on posts, and manage their user accounts. The application provides a set of RESTful APIs to perform these operations. It is designed to be a backend service that can be used by any frontend application, such as a web or mobile app.
+The idea behind CoderSquare is to create a platform where users can share posts about programming topics with useful URLs to other users, similar to [Hacker News](https://news.ycombinator.com/) But related to programming, like and comment on posts, and manage their user accounts. The application provides a set of RESTful APIs to perform these operations. It is designed to be a backend service that can be used by any frontend application, such as a web or mobile app.
 
 The application is built using TypeScript and PostgreSQL as the database. It follows the repository pattern to define raw SQL queries for interacting with the database. For authentication, JWT is used. For the forgot password feature, Gmail is used to send a pin code to the user's email.
+
+## UI Designs
+
+In the `docs` folder under `ui designs`, you can find some screenshots of the application's user interface. Below are some key screenshots:
+
+### Home Page
+
+![Home Page](docs/ui%20designs/1%20home%20page.png)
+
+### Sign Up Page
+
+![Sign Up Page](docs/ui%20designs/6%20sign%20up%20page.png)
+
+### Sign In Page
+
+![Sign In Page](docs/ui%20designs/5%20sign%20in%20page.png)
+
+### Comments Page (Add Comment)
+
+![Comments Page (Add Comment)](<docs/ui%20designs/8%20comments%20page%20(add%20comment).png>)
 
 Key features include:
 
