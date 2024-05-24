@@ -1,0 +1,4 @@
+.env
+/node_modules
+/repo_code
+/request.http

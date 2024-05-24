@@ -1,0 +1,412 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"title": "CoderSquare",
+		"version": "1.0.0"
+	},
+	"servers": [
+		{
+			"url": "http://{{url}}"
+		}
+	],
+	"components": {
+		"securitySchemes": {
+			"noauthAuth": {
+				"type": "http",
+				"scheme": "noauth"
+			},
+			"bearerAuth": {
+				"type": "http",
+				"scheme": "bearer"
+			}
+		}
+	},
+	"tags": [
+		{ "name": "posts" },
+		{ "name": "likes" },
+		{ "name": "comments" },
+		{ "name": "authentication" }
+	],
+	"paths": {
+		"/posts/list": {
+			"get": {
+				"tags": ["posts"],
+				"summary": "get-posts",
+				"security": [{ "noauthAuth": [] }],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "query",
+						"schema": {
+							"type": "string"
+						},
+						"example": "22"
+					},
+					{
+						"name": "sort",
+						"in": "query",
+						"schema": {
+							"type": "string"
+						},
+						"example": "title"
+					},
+					{
+						"name": "fields",
+						"in": "query",
+						"schema": {
+							"type": "string"
+						},
+						"example": "id,title,url"
+					},
+					{
+						"name": "limit",
+						"in": "query",
+						"schema": {
+							"type": "integer"
+						},
+						"example": 2
+					},
+					{
+						"name": "page",
+						"in": "query",
+						"schema": {
+							"type": "integer"
+						},
+						"example": 1
+					},
+					{
+						"name": "search",
+						"in": "query",
+						"schema": {
+							"type": "string"
+						},
+						"example": "number"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {}
+						}
+					}
+				}
+			}
+		},
+		"/posts/new": {
+			"post": {
+				"tags": ["posts"],
+				"summary": "add-post",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"example": {
+									"title": "title of post",
+									"url": "url about post"
+								}
+							}
+						}
+					}
+				},
+				"security": [{ "bearerAuth": [] }],
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {}
+						}
+					}
+				}
+			}
+		},
+		"/posts/{postId}": {
+			"delete": {
+				"tags": ["posts"],
+				"summary": "delete-post",
+				"security": [{ "bearerAuth": [] }],
+				"parameters": [
+					{
+						"name": "postId",
+						"in": "path",
+						"schema": {
+							"type": "string"
+						},
+						"required": true
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {}
+						}
+					}
+				}
+			},
+			"get": {
+				"tags": ["posts"],
+				"summary": "get-post",
+				"parameters": [
+					{
+						"name": "postId",
+						"in": "path",
+						"schema": {
+							"type": "string"
+						},
+						"required": true
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {}
+						}
+					}
+				}
+			}
+		},
+		"/likes/new": {
+			"post": {
+				"tags": ["likes"],
+				"summary": "create like",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"example": {
+									"postid": "{{postId}}"
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {}
+						}
+					}
+				}
+			}
+		},
+		"/comments/new": {
+			"post": {
+				"tags": ["comments"],
+				"summary": "create-comment",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"example": {
+									"postid": "{{postId}}",
+									"comment": "This is a comment"
+								}
+							}
+						}
+					}
+				},
+				"security": [{ "bearerAuth": [] }],
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {}
+						}
+					}
+				}
+			}
+		},
+		"/comments/list/{postId}": {
+			"get": {
+				"tags": ["comments"],
+				"summary": "list-comments",
+				"parameters": [
+					{
+						"name": "postId",
+						"in": "path",
+						"schema": {
+							"type": "string"
+						},
+						"required": true
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {}
+						}
+					}
+				}
+			}
+		},
+		"/comments/{commentId}": {
+			"delete": {
+				"tags": ["comments"],
+				"summary": "delete-comment",
+				"parameters": [
+					{
+						"name": "commentId",
+						"in": "path",
+						"schema": {
+							"type": "string"
+						},
+						"required": true
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {}
+						}
+					}
+				}
+			}
+		},
+		"/auth/signup": {
+			"post": {
+				"tags": ["authentication"],
+				"summary": "signup",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"example": {
+									"firstname": "amr",
+									"lastname": "mohamed",
+									"username": "amrmohamd",
+									"email": "amrmohamd@gmail.com",
+									"password": "testtest"
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {}
+						}
+					}
+				}
+			}
+		},
+		"/auth/login": {
+			"post": {
+				"tags": ["authentication"],
+				"summary": "login",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"example": {
+									"username": "user",
+									"password": "pass"
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {}
+						}
+					}
+				}
+			}
+		},
+		"/auth/forget-password": {
+			"post": {
+				"tags": ["authentication"],
+				"summary": "forget-password",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"example": {
+									"email": "amr@gmail.com"
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {}
+						}
+					}
+				}
+			}
+		},
+		"/auth/reset-password": {
+			"post": {
+				"tags": ["authentication"],
+				"summary": "reset-password",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"example": {
+									"reset_code": "262702",
+									"password": "12341234"
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {}
+						}
+					}
+				}
+			}
+		},
+		"/auth/change-password": {
+			"post": {
+				"tags": ["authentication"],
+				"summary": "change-password",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"example": {
+									"password": "testtest",
+									"newPassword": "test1234"
+								}
+							}
+						}
+					}
+				},
+				"security": [{ "bearerAuth": [] }],
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {}
+						}
+					}
+				}
+			}
+		}
+	}
+}
