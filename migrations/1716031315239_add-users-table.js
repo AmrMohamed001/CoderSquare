@@ -1,4 +1,4 @@
-//    $env:DATABASE_URL="postgres://postgres:root@localhost:5432/coderSquare" ; npm run migrate up
+
 
 /**
  * @type {import('node-pg-migrate').ColumnDefinitions | undefined}
