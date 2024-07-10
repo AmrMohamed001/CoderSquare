@@ -6,8 +6,8 @@ import {
 	createPost,
 	getPost,
 	deletePost,
-} from '../controller/postsController';
-import { protect } from '../controller/authController';
+} from '../controller/posts.controller';
+import { protect } from '../middlewares/authProtection.middleware';
 ///////////////////////////////////////
 
 postsRouter.get('/list', errHandle(listPosts));

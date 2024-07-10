@@ -5,9 +5,9 @@ import {
 	login,
 	resetPassword,
 	signup,
-	protect,
-} from '../controller/authController';
+} from '../controller/auth.controller';
 import errHandle from 'express-async-handler';
+import { protect } from '../middlewares/authProtection.middleware';
 const userRouter = Router();
 
 userRouter.post('/signup', errHandle(signup));

@@ -5,8 +5,9 @@ import {
 	createComment,
 	listComments,
 	deleteComment,
-} from '../controller/commentsController';
-import { protect } from '../controller/authController';
+} from '../controller/comments.controller';
+import { protect } from '../middlewares/authProtection.middleware';
+
 commentsRouter.post('/new', errHandle(protect), errHandle(createComment));
 commentsRouter.get('/list/:id', errHandle(listComments)); // id of the post
 commentsRouter.delete('/:id', errHandle(protect), errHandle(deleteComment));
